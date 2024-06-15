@@ -1,8 +1,5 @@
 import { useState } from "react";
-import {
-  createAuthUserWithEmailAndPassword,
-  createuserDocumentFromAuth,
-} from "../../utils/firebase/firebase";
+import { createAuthUserWithEmailAndPassword } from "../../utils/firebase/firebase";
 import FormInput from "../form-inputs/FormInput";
 const defaultFormFields = {
   displayName: "",
@@ -32,8 +29,7 @@ function SignUp() {
         email,
         password
       );
-      user.displayName = displayName;
-      createuserDocumentFromAuth(user);
+      createuserDocumentFromAuth(user, { displayName });
       setFormFields(defaultFormFields);
     } catch (e) {
       console.log(e.message);
@@ -46,6 +42,7 @@ function SignUp() {
       [event.target.name]: event.target.value,
     });
   };
+
   return (
     <div className="sign-up-container">
       <h2>Don't have an account?</h2>

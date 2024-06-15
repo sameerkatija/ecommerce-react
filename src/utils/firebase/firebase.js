@@ -7,6 +7,8 @@ import {
   GoogleAuthProvider,
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
+  signOut,
+  onAuthStateChanged,
 } from "firebase/auth";
 
 const firebaseConfig = {
@@ -34,7 +36,10 @@ export const signInWithGooglePopup = () =>
 export const signInWithGoogleRedirect = () =>
   signInWithRedirect(auth, googleProvider);
 
-export const createuserDocumentFromAuth = async (userAuth) => {
+export const createuserDocumentFromAuth = async (
+  userAuth,
+  additionalInformation = {}
+) => {
   if (!userAuth) return;
   const userDocRef = doc(db, "users", userAuth.uid);
   const userSnapShot = await getDoc(userDocRef);
@@ -47,6 +52,7 @@ export const createuserDocumentFromAuth = async (userAuth) => {
         displayName,
         email,
         createdAt,
+        ...additionalInformation,
       });
     } catch (e) {
       console.log("Error creating the user", e.message);
@@ -66,3 +72,8 @@ export const signInAuthUserWithEmailAndPassword = async (email, password) => {
   const userAuth1 = await signInWithEmailAndPassword(auth, email, password);
   return userAuth1;
 };
+
+export const signOutuser = async () => await signOut(auth);
+
+export const onAuthStateChangedListener = (callback) =>
+  onAuthStateChanged(auth, callback);
