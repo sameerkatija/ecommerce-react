@@ -46,12 +46,11 @@ function SignUp() {
       [event.target.name]: event.target.value,
     });
   };
-  console.log(formFields);
   return (
     <div className="sign-up-container">
       <h2>Don't have an account?</h2>
       <span>Signup with your Email and password</span>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} method="POST">
         <FormInput
           label="Display Name:"
           type="text"

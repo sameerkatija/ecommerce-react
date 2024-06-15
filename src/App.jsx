@@ -1,7 +1,7 @@
 import { Navigate, Route, Routes, redirect } from "react-router-dom";
 import HomePage from "./routes/home/HomePage";
 import NavigationBar from "./routes/navigation/NavigationBar";
-import SignIn from "./routes/sign-in/SignIn";
+import AuthPage from "./routes/auth/Auth";
 
 const App = () => {
   return (
@@ -10,7 +10,7 @@ const App = () => {
       <Route path="/" element={<NavigationBar />}>
         <Route index={true} element={<HomePage />} />
         <Route path="shop" element={<Shop />} />
-        <Route path="auth" element={<SignIn />} />
+        <Route path="auth" element={<AuthPage />} />
       </Route>
     </Routes>
   );
