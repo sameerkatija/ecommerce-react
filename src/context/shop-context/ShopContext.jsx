@@ -8,7 +8,6 @@ export const ShopContext = createContext({
 export const ShopProvider = ({ children }) => {
   const [categoriesMap, setCategoriesMap] = useState({});
 
-  console.log(getCategoriesAndDicuments());
   useEffect(() => {
     // addCollectionsAndDocuments("categories", SHOP_DATA);
     // setProducts(SHOP_DATA);

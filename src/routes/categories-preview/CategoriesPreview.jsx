@@ -5,7 +5,7 @@ import CategoryPreview from "../../components/category-preview/CategoryPreview";
 
 const CategoriesPreview = () => {
   const { categoriesMap } = useContext(ShopContext);
-  console.log(categoriesMap);
+  // console.log(categoriesMap);
   return (
     <>
       {Object.keys(categoriesMap).map((title) => {

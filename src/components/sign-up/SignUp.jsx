@@ -7,8 +7,8 @@ const defaultFormFields = {
   password: "",
   confirmPassword: "",
 };
-import "./SignUp.scss";
 import Button from "../button/Button";
+import { SignUpContainer } from "./SignUp-styles";
 function SignUp() {
   const [formFields, setFormFields] = useState(defaultFormFields);
   const { displayName, email, password, confirmPassword } = formFields;
@@ -44,7 +44,7 @@ function SignUp() {
   };
 
   return (
-    <div className="sign-up-container">
+    <SignUpContainer>
       <h2>Don't have an account?</h2>
       <span>Signup with your Email and password</span>
       <form onSubmit={handleSubmit} method="POST">
@@ -84,7 +84,7 @@ function SignUp() {
         />
         <Button type="submit">Sign Up</Button>
       </form>
-    </div>
+    </SignUpContainer>
   );
 }
 
