@@ -4,7 +4,20 @@ import { RootReducer } from "./root-reducer";
 
 // const middleWares = applyMiddleware(logger);
 
-const middleWares = [logger];
+const loggerMiddleWare = (store) => (next) => (action) => {
+  if (!action.type) {
+    return next(action);
+  }
+
+  console.log({ "Type: ": action.type, "Payload: ": action.payload });
+  console.log("current State: ", store.getState());
+
+  next(action);
+
+  console.log("next State: ", store.getState());
+};
+
+const middleWares = [loggerMiddleWare];
 const composedEnhancers = compose(applyMiddleware(...middleWares));
 
 // export const store = createStore(RootReducer, middleWares);

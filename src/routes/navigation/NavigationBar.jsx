@@ -1,11 +1,10 @@
 import { Outlet } from "react-router-dom";
 import CrownSVG from "../../assets/crown.svg";
 
-import { useContext } from "react";
 import { signOutuser } from "../../utils/firebase/firebase";
 import CartIcon from "../../components/cart-icon/CartIcon";
 import CartDropDown from "../../components/cart-dropdown/CartDropDown";
-import { CartDropDownContext } from "../../context/cart-dropdown-context/CartDropDownContext";
+
 import {
   LinkContainer,
   LogoContainer,
@@ -14,11 +13,12 @@ import {
 } from "./NavigationBar-styles";
 import { useSelector } from "react-redux";
 import { selectCurrentUser } from "../../store/user/UserSelectors";
+import { selectIsCartOpen } from "../../store/cart/CartSelector";
 
 function NavigationBar() {
   const currentUser = useSelector(selectCurrentUser);
-  const { isCartOpen } = useContext(CartDropDownContext);
-
+  const isCartOpen = useSelector(selectIsCartOpen);
+  console.log("IS", isCartOpen);
   return (
     <>
       <NavigationContainer>
