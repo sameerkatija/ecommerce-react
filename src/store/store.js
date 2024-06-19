@@ -3,6 +3,7 @@ import logger from "redux-logger";
 import { RootReducer } from "./root-reducer";
 import { persistStore, persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage";
+import { thunk } from "redux-thunk";
 // const middleWares = applyMiddleware(logger);
 
 // const loggerMiddleWare = (store) => (next) => (action) => {
@@ -26,9 +27,10 @@ const persistConfig = {
 
 const persistedReducer = persistReducer(persistConfig, RootReducer);
 
-const middleWares = [process.env.NODE_ENV === "development" && logger].filter(
-  Boolean
-);
+const middleWares = [
+  process.env.NODE_ENV === "development" && logger,
+  thunk,
+].filter(Boolean);
 
 const composedEnhancer =
   (process.env.NODE_ENV !== "production" &&
@@ -46,5 +48,6 @@ export const store = createStore(
   composedEnhancers
 );
 
+// export const store = createStore(RootReducer, undefined, composedEnhancers);
 export const persistedStore = persistStore(store);
 // export const store = createStore(RootReducer);
