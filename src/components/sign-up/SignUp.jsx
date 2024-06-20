@@ -1,5 +1,8 @@
 import { useState } from "react";
-import { createAuthUserWithEmailAndPassword } from "../../utils/firebase/firebase";
+import {
+  createAuthUserWithEmailAndPassword,
+  createuserDocumentFromAuth,
+} from "../../utils/firebase/firebase";
 import FormInput from "../form-inputs/FormInput";
 const defaultFormFields = {
   displayName: "",
@@ -9,10 +12,12 @@ const defaultFormFields = {
 };
 import Button from "../button/Button";
 import { SignUpContainer } from "./SignUp-styles";
+import { signUpStart } from "../../store/user/UserAction";
+import { useDispatch } from "react-redux";
 function SignUp() {
   const [formFields, setFormFields] = useState(defaultFormFields);
   const { displayName, email, password, confirmPassword } = formFields;
-
+  const dispatch = useDispatch();
   const handleSubmit = async (event) => {
     event.preventDefault();
     const { email, password, confirmPassword, displayName } = formFields;
@@ -25,11 +30,8 @@ function SignUp() {
         alert("missing");
         return;
       }
-      const { user } = await createAuthUserWithEmailAndPassword(
-        email,
-        password
-      );
-      createuserDocumentFromAuth(user, { displayName });
+
+      dispatch(signUpStart(email, password, displayName));
       setFormFields(defaultFormFields);
     } catch (e) {
       console.log(e.message);

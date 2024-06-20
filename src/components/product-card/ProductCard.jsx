@@ -1,4 +1,3 @@
-import { useContext } from "react";
 import {
   ProductCardContainerDiv,
   ProductFooterDiv,
@@ -6,13 +5,15 @@ import {
   ProductPriceSpan,
 } from "./ProductCard-styles.jsx";
 import Button, { BUTTON_TYPE_CLASSES } from "../button/Button";
-import { CartDropDownContext } from "../../context/cart-dropdown-context/CartDropDownContext";
+import { addItemToCart } from "../../store/cart/CartAction.js";
+import { useDispatch, useSelector } from "react-redux";
+import { selectCartItems } from "../../store/cart/CartSelector.js";
 
 const ProductCard = ({ product }) => {
   const { name, price, imageUrl } = product;
-  const { addItemToCart } = useContext(CartDropDownContext);
-
-  const addProductToCart = () => addItemToCart(product);
+  const dispatch = useDispatch();
+  const cartItems = useSelector(selectCartItems);
+  const addProductToCart = () => dispatch(addItemToCart(cartItems, product));
   return (
     <ProductCardContainerDiv>
       <img src={imageUrl} alt={`${name}`} />
