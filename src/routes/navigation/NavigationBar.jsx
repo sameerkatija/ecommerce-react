@@ -18,7 +18,7 @@ import { selectIsCartOpen } from "../../store/cart/CartSelector";
 function NavigationBar() {
   const currentUser = useSelector(selectCurrentUser);
   const isCartOpen = useSelector(selectIsCartOpen);
-  console.log("IS", isCartOpen);
+
   return (
     <>
       <NavigationContainer>

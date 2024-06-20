@@ -5,15 +5,13 @@ import {
   ProductPriceSpan,
 } from "./ProductCard-styles.jsx";
 import Button, { BUTTON_TYPE_CLASSES } from "../button/Button";
-import { addItemToCart } from "../../store/cart/CartAction.js";
-import { useDispatch, useSelector } from "react-redux";
-import { selectCartItems } from "../../store/cart/CartSelector.js";
+import { addItemToCart } from "../../store/cart/CartReducer.js";
+import { useDispatch } from "react-redux";
 
 const ProductCard = ({ product }) => {
   const { name, price, imageUrl } = product;
   const dispatch = useDispatch();
-  const cartItems = useSelector(selectCartItems);
-  const addProductToCart = () => dispatch(addItemToCart(cartItems, product));
+  const addProductToCart = () => dispatch(addItemToCart(product));
   return (
     <ProductCardContainerDiv>
       <img src={imageUrl} alt={`${name}`} />

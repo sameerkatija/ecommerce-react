@@ -9,9 +9,8 @@ import {
   createuserDocumentFromAuth,
   onAuthStateChangedListener,
 } from "./utils/firebase/firebase";
-import { setCurrentUser } from "./store/user/UserAction";
 import { useDispatch } from "react-redux";
-
+import { setCurrentUser } from "./store/user/UserReducer.js";
 const App = () => {
   const dispatch = useDispatch();
   useEffect(() => {
@@ -19,6 +18,10 @@ const App = () => {
       if (user) {
         createuserDocumentFromAuth(user);
       }
+      const userPicked = user && {
+        accessToken: user.accessToken,
+        email: user.email,
+      };
       dispatch(setCurrentUser(user));
     });
 

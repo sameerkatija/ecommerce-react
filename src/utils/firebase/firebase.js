@@ -67,7 +67,7 @@ export const createuserDocumentFromAuth = async (
       console.log("Error creating the user", e.message);
     }
   }
-  return userDocRef;
+  return userSnapShot;
 };
 
 export const addCollectionsAndDocuments = async (
