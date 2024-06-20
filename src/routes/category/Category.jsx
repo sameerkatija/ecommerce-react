@@ -12,12 +12,11 @@ import Spinner from "../../components/spinner/Spinner";
 
 const Category = () => {
   const { category } = useParams();
-  console.log(`category component rendered`);
+
   const categoriesMap = useSelector(selectCategoriesMap);
   const [products, setProducts] = useState(categoriesMap[category]);
   const isLoading = useSelector(selectIscategoryLoading);
   useEffect(() => {
-    console.log(`category effect rendered`);
     setProducts(categoriesMap[category]);
   }, [category, categoriesMap]);
   return (
